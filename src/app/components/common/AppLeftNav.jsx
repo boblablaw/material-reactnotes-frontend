@@ -10,9 +10,9 @@ import LoginActions from '../../actions/LoginActions';
 var menuItems = [
   { route: 'login', text: 'Login' },
   { type: MenuItem.Types.SUBHEADER, text: 'Resources' },
-  { type: MenuItem.Types.LINK, payload: 'https://github.com/callemall/material-ui', text: 'About' },
-  { type: MenuItem.Types.LINK, payload: 'http://facebook.github.io/react', text: 'Getting-Started' },
-  { type: MenuItem.Types.LINK, payload: 'https://www.google.com/design/spec/material-design/introduction.html', text: 'Features' }
+  { route: 'about', text: 'About' },
+  { route: 'get-started', text: 'Get Started' },
+  { route: 'features', text: 'Features' }
 ];
 
 class AppLeftNav extends React.Component {

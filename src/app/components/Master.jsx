@@ -87,8 +87,6 @@ class Master extends React.Component {
         { appBar }
         <AppLeftNav ref="leftNav" />
         <RouteHandler />
-
-        { footer }
       </AppCanvas>
     );
   }
@@ -101,7 +99,8 @@ class Master extends React.Component {
   _getAppBar() {
     var title =
       this.context.router.isActive('get-started') ? 'Get Started' :
-      this.context.router.isActive('customization') ? 'Customization' :
+      this.context.router.isActive('features') ? 'Features' :
+      this.context.router.isActive('about') ? 'About' :
       this.context.router.isActive('login') ? 'Login' :
       this.context.router.isActive('signup') ? 'Signup' : 
       this.context.router.isActive('components') ? 'Components' : '';

@@ -142,13 +142,13 @@ var Welcome = React.createClass({
 
     return (
       <FullWidthSection style={styles.root} useContent={true} contentStyle={styles.content} contentType="p" className="home-purpose">
-        Material-UI came about from our love of&nbsp;
+        Test project to learn how to develop front-end utilizing&nbsp;
         <a href="http://facebook.github.io/react/">React</a> and&nbsp;
-        <a href="https://www.google.com/design/spec/material-design/introduction.html">
-          Google's Material Design
-        </a>. We're currently using it on a project at&nbsp;
-        <a href="https://www.call-em-all.com/">Call-Em-All</a> and plan on adding to it 
-        and making it better in the coming months.
+        <a href="https://facebook.github.io/react/docs/flux-overview.html">
+          Flux
+        </a>. The design is heavily influenced by Google's material design&nbsp;
+        and utilizing the excellent&nbsp;
+        <a href="https://github.com/callemall/material-ui">Material-UI</a> React components.
       </FullWidthSection>
     );
   },
@@ -157,9 +157,9 @@ var Welcome = React.createClass({
     var styles = {maxWidth: '906px'};
     return (
       <FullWidthSection useContent={true} contentStyle={styles}>
-        <WelcomeFeature heading="Get Started" route="login" img="images/get-started.svg" firstChild={true}/>
-        <WelcomeFeature heading="Customization" route="login" img="images/css-framework.svg" />
-        <WelcomeFeature heading="Components" route="login" img="images/components.svg" lastChild={true}/>
+        <WelcomeFeature heading="Get Started" route="get-started" img="images/get-started.svg" firstChild={true}/>
+        <WelcomeFeature heading="Features" route="features" img="images/css-framework.svg" />
+        <WelcomeFeature heading="About" route="about" img="images/components.svg" lastChild={true}/>
       </FullWidthSection>
     );
   },
@@ -183,9 +183,9 @@ var Welcome = React.createClass({
     return (
       <FullWidthSection useContent={true} style={styles.root}>
         <h3 style={styles.h3}>
-          Want to help make this <span style={styles.nowrap}>project awesome?</span> <span style={styles.nowrap}>Check out our repo.</span>
+           <span style={styles.nowrap}>Check out the repo.</span>
         </h3>
-        <RaisedButton label="GitHub" primary={true} linkButton={true} href="https://github.com/callemall/material-ui" style={styles.button}/>
+        <RaisedButton label="GitHub" primary={true} linkButton={true} href="https://github.com/boblablaw/material-reactnotes-frontend" style={styles.button}/>
       </FullWidthSection>
     );
   },

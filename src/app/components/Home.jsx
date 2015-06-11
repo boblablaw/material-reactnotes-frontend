@@ -5,7 +5,9 @@ export default AuthenticatedComponent(class Home extends React.Component {
   render() {
     return (
       <div>
-        Hello, World!
+        <br /><br /><br /><br />
+        Notes
+        <br /><br /><br /><br />
       </div>);
   }
 });

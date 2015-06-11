@@ -1,10 +1,15 @@
 import React from 'react';
 import Router, {Route, NotFoundRoute, Redirect} from 'react-router';
+
 import Master from './components/Master.jsx'
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home';
 import Welcome from './components/Welcome';
+import About from './components/About';
+import GetStarted from './components/GetStarted';
+import Features from './components/Features';
+
 import LoginActions from './actions/LoginActions';
 import RouterContainer from './services/RouterContainer';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -12,6 +17,9 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 let routes = (
   <Route name="root" handler={Master}>
     <Route name="welcome" path="/welcome" handler={Welcome}/>
+    <Route name="about" path="/about" handler={About}/>
+    <Route name="get-started" path="/get-started" handler={GetStarted}/>
+    <Route name="features" path="/features" handler={Features}/>
     <Route name="login" path="/login" handler={Login}/>
     <Route name="signup" path="/signup" handler={Signup}/>
     <Route name="home" path="/" handler={Home}/>
