@@ -3,6 +3,7 @@ import Router from 'react-router';
 import mui from 'material-ui';
 import WelcomeFeature from './WelcomeFeature';
 import FullWidthSection from './common/FullWidthSection';
+import Footer from './common/Footer';
 
 let RaisedButton = mui.RaisedButton;
 let ThemeManager = new mui.Styles.ThemeManager().getCurrentTheme();
@@ -26,6 +27,7 @@ var Welcome = React.createClass({
         {this._getWelcomePurpose()}
         {this._getWelcomeFeatures()}
         {this._getWelcomeContribute()}
+        <Footer />
       </div>
     );
   },

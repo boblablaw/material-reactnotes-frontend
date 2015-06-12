@@ -30,11 +30,7 @@ class Master extends React.Component {
       accent1Color: Colors.deepOrange500
     });
   }
-  
-  componentWillReceiveProps(nextProps) {
-    debugger;
-  }
-  
+
   getStyles() {
     var darkWhite = Colors.darkWhite;
     return {
@@ -61,26 +57,6 @@ class Master extends React.Component {
     var styles = this.getStyles();
     var appBar = this._getAppBar();
     var leftNav = this._getLeftNav();
-
-    var githubButton = (
-      <IconButton
-        iconStyle={styles.iconButton}
-        iconClassName="muidocs-icon-custom-github"
-        href="https://github.com/callemall/material-ui"
-        linkButton={true} />
-    );
-    
-    var footer = this.state.userLoggedIn ? (
-      <div></div> 
-    ) : (
-      <FullWidthSection style={styles.footer}>
-        <p style={styles.p}>
-          Hand crafted with love by the engineers at <a style={styles.a} href="http://call-em-all.com">Call-Em-All</a> and our
-          awesome <a style={styles.a} href="https://github.com/callemall/material-ui/graphs/contributors">contributors</a>.
-        </p>
-        {githubButton}
-      </FullWidthSection>
-    );
 
     return (
       <AppCanvas predefinedLayout={1}>
@@ -114,26 +90,7 @@ class Master extends React.Component {
       </div>
     );
   }
-  
-  _getLeftNav() {
-    var menuItems = [
-      { type: MenuItem.Types.SUBHEADER, text: 'Resources' },
-      { type: MenuItem.Types.LINK, payload: 'https://github.com/callemall/material-ui', text: 'About' },
-      { type: MenuItem.Types.LINK, payload: 'http://facebook.github.io/react', text: 'Getting-Started' },
-      { type: MenuItem.Types.LINK, payload: 'https://www.google.com/design/spec/material-design/introduction.html', text: 'Features' }
-    ];
-    
-    !this.state.userLoggedIn ? 
-      menuItems.unshift({ route: 'login', text: 'Login' }, { route: 'signup', text: 'Signup' }) : 
-      menuItems.unshift({ logout: 'logout', text: 'Logout' });
-    
-    return (
-      <div>
-        <AppLeftNav menuItems={menuItems} ref="leftNav" />
-      </div>
-    );
-  }
-  
+
   _onLeftIconButtonTouchTap() {
     this.refs.leftNav.toggle();
   }

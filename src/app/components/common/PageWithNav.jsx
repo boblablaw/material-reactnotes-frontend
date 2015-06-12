@@ -8,7 +8,6 @@ var {Spacing, Colors} = mui.Styles;
 var {StyleResizable, StylePropable} = mui.Mixins;
 
 var PageWithNav = React.createClass({
-
   mixins: [StyleResizable, StylePropable],
 
   contextTypes: {
@@ -23,7 +22,6 @@ var PageWithNav = React.createClass({
     var subNavWidth = Spacing.desktopKeylineIncrement * 3 + 'px';
     var styles = {
       root: {
-        paddingTop: Spacing.desktopKeylineIncrement + 'px'
       },
       rootWhenMedium: {
         position: 'relative'
@@ -40,7 +38,7 @@ var PageWithNav = React.createClass({
       secondaryNavWhenMedium: {
         borderTop: 'none',
         position: 'absolute',
-        top: '64px',
+        top: 0,
         width: subNavWidth
       },
       contentWhenMedium: {
@@ -64,8 +62,8 @@ var PageWithNav = React.createClass({
     var styles = this.getStyles();
     return (
       <div style={styles.root}>
-        <div style={styles.content}>
-          <RouteHandler />
+      <div style={styles.content}>
+          Hello World
         </div>
         <div style={styles.secondaryNav}>
           <Menu 
@@ -90,6 +88,7 @@ var PageWithNav = React.createClass({
   },
 
   _onMenuItemClick: function(e, index, item) {
+    debugger;
     this.context.router.transitionTo(item.route);
   }
   
