@@ -56,7 +56,6 @@ class Master extends React.Component {
   render() {
     var styles = this.getStyles();
     var appBar = this._getAppBar();
-    var leftNav = this._getLeftNav();
 
     return (
       <AppCanvas predefinedLayout={1}>

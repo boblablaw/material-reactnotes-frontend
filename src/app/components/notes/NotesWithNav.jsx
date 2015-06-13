@@ -1,14 +1,28 @@
-var React = require('react');
-var Router = require('react-router');
+import React from 'react';
+import Router from 'react-router';
 var RouteHandler = Router.RouteHandler;
-var mui = require('material-ui');
-var Menu = mui.Menu;
+var Link = Router.Link;
 
+import mui from 'material-ui';
+var Menu = mui.Menu;
 var {Spacing, Colors} = mui.Styles;
 var {StyleResizable, StylePropable} = mui.Mixins;
 
-var PageWithNav = React.createClass({
-  mixins: [StyleResizable, StylePropable],
+/*export default AuthenticatedComponent(class Home extends React.Component {*/
+
+var notes = [
+  {id: 1, title: "Title", abstract: "abstract", updated_at: "1 hour ago", body: "body text"},
+  {id: 2, title: "Title2", abstract: "abstract2", updated_at: "2 hours ago", body: "body text2"}
+];
+
+notes = [
+  { id: 1, text: 'Note Title 1', data: '5735 Broadway Terrace', route: 'note' },
+  { id: 2, text: 'Note Title 2', data: 'Announcement', route: 'note' },
+  { id: 3, text: 'Note Title 3', data: '(123) 456-7890', route: 'note' }
+];
+
+var NotesWithNav = React.createClass({
+  mixins: [StyleResizable, StylePropable, Router.State],
 
   contextTypes: {
     router: React.PropTypes.func
@@ -19,7 +33,7 @@ var PageWithNav = React.createClass({
   },
 
   getStyles: function(){
-    var subNavWidth = Spacing.desktopKeylineIncrement * 3 + 'px';
+    var subNavWidth = Spacing.desktopKeylineIncrement * 3.5 + 'px';
     var styles = {
       root: {
       },
@@ -45,16 +59,18 @@ var PageWithNav = React.createClass({
         marginLeft: subNavWidth,
         borderLeft: 'solid 1px ' + Colors.grey300,
         minHeight: '800px'
+      },
+      itemSubheader: {
       }
     };
 
-    if (this.isDeviceSize(StyleResizable.statics.Sizes.MEDIUM) || 
+    if (this.isDeviceSize(StyleResizable.statics.Sizes.MEDIUM) ||
         this.isDeviceSize(StyleResizable.statics.Sizes.LARGE)) {
       styles.root = this.mergeStyles(styles.root, styles.rootWhenMedium);
       styles.secondaryNav = this.mergeStyles(styles.secondaryNav, styles.secondaryNavWhenMedium);
       styles.content = this.mergeStyles(styles.content, styles.contentWhenMedium);
     }
-    
+
     return styles;
   },
 
@@ -62,36 +78,36 @@ var PageWithNav = React.createClass({
     var styles = this.getStyles();
     return (
       <div style={styles.root}>
-      <div style={styles.content}>
-          Hello World
+        <div style={styles.content}>
+          <RouteHandler />
         </div>
         <div style={styles.secondaryNav}>
-          <Menu 
-            ref="menuItems" 
-            zDepth={0} 
-            menuItems={this.props.menuItems} 
-            selectedIndex={this._getSelectedIndex()} 
-            onItemClick={this._onMenuItemClick} />
+          <Menu
+            ref="menuItems"
+            zDepth={0}
+            menuItemStyleSubheader={styles.itemSubheader}
+            menuItems={ notes }
+            selectedIndex={this._getSelectedIndex()}
+            onItemTap={this._onMenuItemClick} />
         </div>
       </div>
     );
   },
 
   _getSelectedIndex: function() {
-    var menuItems = this.props.menuItems;
+    var menuItems = notes;
     var currentItem;
 
     for (var i = menuItems.length - 1; i >= 0; i--) {
       currentItem = menuItems[i];
-      if (currentItem.route && this.context.router.isActive(currentItem.route)) return i;
+      if (currentItem.id && (currentItem.id.toString() == this.getPath().slice(-1))) return i;
     }
   },
 
   _onMenuItemClick: function(e, index, item) {
-    debugger;
-    this.context.router.transitionTo(item.route);
+    this.context.router.transitionTo(item.route, { noteId: item.id });
   }
-  
+
 });
 
-module.exports = PageWithNav;
+module.exports = NotesWithNav;

@@ -9,6 +9,7 @@ import Welcome from './components/Welcome';
 import About from './components/About';
 import GetStarted from './components/GetStarted';
 import Features from './components/Features';
+import NoteItem from './components/notes/NoteItem';
 
 import LoginActions from './actions/LoginActions';
 import RouterContainer from './services/RouterContainer';
@@ -17,12 +18,14 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 let routes = (
   <Route name="root" handler={Master}>
     <Route name="welcome" path="/welcome" handler={Welcome}/>
-    <Route name="about" path="/about" handler={About}/>
     <Route name="get-started" path="/get-started" handler={GetStarted}/>
+    <Route name="about" path="/about" handler={About}/>
     <Route name="features" path="/features" handler={Features}/>
     <Route name="login" path="/login" handler={Login}/>
     <Route name="signup" path="/signup" handler={Signup}/>
-    <Route name="home" path="/" handler={Home}/>
+    <Route name="home" path="/" handler={Home}>
+      <Route name="note" path="/notes/:noteId" handler={NoteItem}/>
+    </Route>
     <NotFoundRoute handler={Welcome}/>
     <Redirect from="boobs" to="welcome" />
   </Route>
