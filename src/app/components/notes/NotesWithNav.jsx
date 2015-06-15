@@ -3,22 +3,19 @@ import Router from 'react-router';
 var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 
+import NoteStore from '../../stores/NoteStore';
+import NoteActions from '../../actions/NoteActions';
+import NoteService from '../../services/NoteService';
+
 import mui from 'material-ui';
 var Menu = mui.Menu;
 var {Spacing, Colors} = mui.Styles;
 var {StyleResizable, StylePropable} = mui.Mixins;
 
-/*export default AuthenticatedComponent(class Home extends React.Component {*/
-
 var notes = [
-  {id: 1, title: "Title", abstract: "abstract", updated_at: "1 hour ago", body: "body text"},
-  {id: 2, title: "Title2", abstract: "abstract2", updated_at: "2 hours ago", body: "body text2"}
-];
-
-notes = [
-  { id: 1, text: 'Note Title 1', data: '5735 Broadway Terrace', route: 'note' },
-  { id: 2, text: 'Note Title 2', data: 'Announcement', route: 'note' },
-  { id: 3, text: 'Note Title 3', data: '(123) 456-7890', route: 'note' }
+  { id: 1, text: 'Note Title 1', data: '5735 Broadway Terrace' },
+  { id: 2, text: 'Note Title 2', data: 'Announcement' },
+  { id: 3, text: 'Note Title 3', data: '(123) 456-7890' }
 ];
 
 var NotesWithNav = React.createClass({
@@ -30,6 +27,29 @@ var NotesWithNav = React.createClass({
 
   propTypes: {
     menuItems: React.PropTypes.array
+  },
+
+  getInitialState: function() {
+    return {
+      notes: NoteStore.getAllNotes(),
+      errors: []
+    };
+  },
+
+  componentDidMount: function() {
+    NoteStore.addChangeListener(this._onChange);
+    NoteService.loadNotes();
+  },
+
+  componentWillUnmount: function() {
+    NoteStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    this.setState({
+      notes: NoteStore.getAllNotes(),
+      errors: NoteStore.getErrors()
+    });
   },
 
   getStyles: function(){
@@ -79,7 +99,7 @@ var NotesWithNav = React.createClass({
     return (
       <div style={styles.root}>
         <div style={styles.content}>
-          <RouteHandler />
+        <RouteHandler />
         </div>
         <div style={styles.secondaryNav}>
           <Menu
@@ -95,19 +115,18 @@ var NotesWithNav = React.createClass({
   },
 
   _getSelectedIndex: function() {
-    var menuItems = notes;
+    var noteItems = notes;
     var currentItem;
 
-    for (var i = menuItems.length - 1; i >= 0; i--) {
-      currentItem = menuItems[i];
-      if (currentItem.id && (currentItem.id.toString() == this.getPath().slice(-1))) return i;
+    for (var i = noteItems.length - 1; i >= 0; i--) {
+      currentItem = noteItems[i];
+      if (currentItem.id && (currentItem.id.toString() == this.getParams().noteId )) return i;
     }
   },
 
   _onMenuItemClick: function(e, index, item) {
-    this.context.router.transitionTo(item.route, { noteId: item.id });
+    this.context.router.transitionTo('note', { noteId: item.id });
   }
-
 });
 
 module.exports = NotesWithNav;

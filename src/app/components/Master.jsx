@@ -78,7 +78,7 @@ class Master extends React.Component {
       this.context.router.isActive('about') ? 'About' :
       this.context.router.isActive('login') ? 'Login' :
       this.context.router.isActive('signup') ? 'Signup' : 
-      this.context.router.isActive('components') ? 'Components' : '';
+      this.context.router.isActive('components') ? 'Components' : 'ReactNotes';
 
     return (
       <div>

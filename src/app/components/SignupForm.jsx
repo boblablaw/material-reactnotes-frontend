@@ -22,7 +22,7 @@ var SignupForm = React.createClass({
   signup: function(e) {
     e.preventDefault();
     this.setState({ errors: [] });
-    Auth.signup(this.state.email, this.state.username, this.state.password, this.state.passwordConf)
+    Auth.signup(this.state.email, this.state.username, this.state.password)
       .catch(function(err) {
         alert("There's an error logging in");
         console.log("Error logging in", err);

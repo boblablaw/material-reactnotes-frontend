@@ -36,8 +36,7 @@ var Footer = React.createClass({
     return (
       <FullWidthSection style={styles.footer}>
         <p style={styles.p}>
-          Hand crafted with love by the engineers at <a style={styles.a} href="http://call-em-all.com">Call-Em-All</a> and our
-          awesome <a style={styles.a} href="https://github.com/callemall/material-ui/graphs/contributors">contributors</a>.
+          Footer stuff goes here
         </p>
       </FullWidthSection>
     );

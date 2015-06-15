@@ -1,0 +1,10 @@
+var BASE_URL = 'http://localhost:3002/';
+export default {
+  BASE_URL: BASE_URL,
+  NOTES_URL: BASE_URL + 'v1/notes',
+  LOAD_NOTE: 'LOAD_NOTE',
+  LOAD_NOTES: 'LOAD_NOTES',
+  DELETE_NOTE: 'DELETE_NOTE',
+  CREATE_NOTE: 'CREATE_NOTE',
+  UPDATE_NOTE: 'UPDATE_NOTE'
+}

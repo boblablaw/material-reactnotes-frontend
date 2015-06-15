@@ -3,7 +3,19 @@ import when from 'when';
 import {LOGIN_URL, SIGNUP_URL} from '../constants/LoginConstants';
 import LoginActions from '../actions/LoginActions';
 
-class AuthService {
+function _getErrors(res) {
+  var errorMsgs = ["Something went wrong, please try again"];
+  if ((json = JSON.parse(res.text))) {
+    if (json['errors']) {
+      errorMsgs = json['errors'];
+    } else if (json['error']) {
+      errorMsgs = [json['error']];
+    }
+  }
+  return errorMsgs;
+}
+
+export default new class AuthService {
   login(username, password) {
     return this.handleAuth(when(request({
       url: LOGIN_URL,
@@ -42,5 +54,3 @@ class AuthService {
       });
   }
 }
-
-export default new AuthService()
