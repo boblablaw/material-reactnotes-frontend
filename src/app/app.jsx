@@ -46,5 +46,5 @@ if (accessToken) {
 }
 
 router.run(function (Handler) {
-  React.render(<Handler />, document.body);
+  React.render(<Handler />, document.getElementById('content'));
 });
