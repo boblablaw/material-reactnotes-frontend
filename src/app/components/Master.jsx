@@ -15,7 +15,6 @@ var { AppBar, AppCanvas, Menu, IconButton, MenuItem } = mui;
 class Master extends React.Component {
   constructor() {
     super()
-    this.state = this._getLoginState();
     this._onLeftIconButtonTouchTap = this._onLeftIconButtonTouchTap.bind(this);
   }
   
@@ -66,11 +65,6 @@ class Master extends React.Component {
     );
   }
 
-  logout(e) {
-    e.preventDefault();
-    LoginStore.logout();
-  }
-
   _getAppBar() {
     var title =
       this.context.router.isActive('get-started') ? 'Get Started' :
@@ -92,16 +86,6 @@ class Master extends React.Component {
 
   _onLeftIconButtonTouchTap() {
     this.refs.leftNav.toggle();
-  }
-  
-  _getLoginState() {
-    return {
-      userLoggedIn: LoginStore.isLoggedIn()
-    };
-  }
-  
-  _onChange() {
-    this.setState(this._getLoginState());
   }
 }
 

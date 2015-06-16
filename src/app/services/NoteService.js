@@ -16,7 +16,7 @@ function _getErrors(res) {
   return errorMsgs;
 }
 
-export default new class AuthService {
+export default new class NoteService {
   loadNotes() {
     request.get(NOTES_URL)
       .set('Accept', 'application/json')
@@ -30,7 +30,7 @@ export default new class AuthService {
   }
 
   loadNote(noteId) {
-    request.get(NOTES_URL)
+    request.get(NOTES_URL + '/' + noteId)
       .set('Accept', 'application/json')
       .set('Authorization', localStorage.getItem('accessToken'))
       .end(function(error, res){

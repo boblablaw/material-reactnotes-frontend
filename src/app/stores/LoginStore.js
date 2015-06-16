@@ -1,7 +1,7 @@
 import {LOGIN_USER, LOGOUT_USER} from '../constants/LoginConstants';
 import BaseStore from './BaseStore';
 
-class LoginStore extends BaseStore {
+export default new class LoginStore extends BaseStore {
   constructor() {
     super();
     this.subscribe(() => this._registerToActions.bind(this))
@@ -43,6 +43,4 @@ class LoginStore extends BaseStore {
 //    return !!this._username;
     return !!this._accessToken;
   }
-}
-
-export default new LoginStore();
+};

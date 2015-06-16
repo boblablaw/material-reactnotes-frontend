@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import {LOAD_NOTE, LOAD_NOTES, CREATE_NOTE, UPDATE_NOTE, DELETE_NOTE} from '../constants/NoteConstants';
 import BaseStore from './BaseStore';
 

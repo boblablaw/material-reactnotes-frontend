@@ -1,7 +1,7 @@
-var React = require('react');
-var Router = require('react-router');
-var mui = require('material-ui');
-var {MenuItem, LeftNav} = mui;
+import React from 'react';
+import Router from 'react-router';
+import mui from 'material-ui';
+import {MenuItem, LeftNav, Styles} from 'material-ui';
 var {Colors, Spacing, Typography} = mui.Styles;
 
 import LoginStore from '../../stores/LoginStore';

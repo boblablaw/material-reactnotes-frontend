@@ -1,7 +1,6 @@
 import React from 'react';
 import Router from 'react-router';
-var RouteHandler = Router.RouteHandler;
-var Link = Router.Link;
+import { RouteHandler, Link } from 'react-router';
 
 import NoteStore from '../../stores/NoteStore';
 import NoteActions from '../../actions/NoteActions';
@@ -12,11 +11,7 @@ var Menu = mui.Menu;
 var {Spacing, Colors} = mui.Styles;
 var {StyleResizable, StylePropable} = mui.Mixins;
 
-var notes = [
-  { id: 1, text: 'Note Title 1', data: '5735 Broadway Terrace' },
-  { id: 2, text: 'Note Title 2', data: 'Announcement' },
-  { id: 3, text: 'Note Title 3', data: '(123) 456-7890' }
-];
+import timeago from 'timeago';
 
 var NotesWithNav = React.createClass({
   mixins: [StyleResizable, StylePropable, Router.State],
@@ -102,13 +97,7 @@ var NotesWithNav = React.createClass({
         <RouteHandler />
         </div>
         <div style={styles.secondaryNav}>
-          <Menu
-            ref="menuItems"
-            zDepth={0}
-            menuItemStyleSubheader={styles.itemSubheader}
-            menuItems={ notes }
-            selectedIndex={this._getSelectedIndex()}
-            onItemTap={this._onMenuItemClick} />
+          <NotesList notes={this.state.notes} />
         </div>
       </div>
     );
@@ -129,4 +118,43 @@ var NotesWithNav = React.createClass({
   }
 });
 
+var NotesList = React.createClass({
+  render: function() {
+    return (
+      <ul>
+        {this.props.notes.map(function(note, index){
+          return <Item note={note} key={"note-" + index}/>
+        })}
+      </ul>
+    );
+  }
+});
+
+var Item = React.createClass({
+  render: function() {
+    var params = { noteId: this.props.note.id };
+    return (
+      <div>
+        <Link to="note" params={params}>
+          <li>
+            <div>{this.props.note.title}</div>
+            <div>{this.props.note['abstract']}...</div>
+            <span>{timeago(this.props.note.updated_at)}</span>
+          </li>
+        </Link>
+      </div>
+    );
+  }
+});
+
 module.exports = NotesWithNav;
+
+/*
+ <Menu
+            ref="menuItems"
+            zDepth={0}
+            menuItemStyleSubheader={styles.itemSubheader}
+            menuItems={ notes }
+            selectedIndex={this._getSelectedIndex()}
+            onItemTap={this._onMenuItemClick} />
+*/

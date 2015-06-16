@@ -1,11 +1,7 @@
-var React = require('react');
+import React from 'react';
 import FullWidthSection from './FullWidthSection';
-
 import mui from 'material-ui';
-var Colors = mui.Styles.Colors;
-var Typography = mui.Styles.Typography;
-var ThemeManager = new mui.Styles.ThemeManager();
-var { AppBar, AppCanvas, Menu, IconButton, MenuItem } = mui;
+var {Colors, Spacing, Typography} = mui.Styles;
 
 var Footer = React.createClass({
   getStyles() {
