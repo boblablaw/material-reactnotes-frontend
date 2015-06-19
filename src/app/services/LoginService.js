@@ -15,7 +15,7 @@ function _getErrors(res) {
   return errorMsgs;
 }
 
-export default new class AuthService {
+export default new class LoginService {
   login(username, password) {
     return this.handleAuth(when(request({
       url: LOGIN_URL,

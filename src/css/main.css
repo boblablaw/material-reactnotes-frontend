@@ -1,0 +1,40 @@
+/* custom font icons */
+@import "font-icons/style.css";
+
+/* hightlight.js for syntax highlighting */
+@import "github.css";
+
+@import 'medium-editor/medium-editor.css';
+@import 'medium-editor/themes/default.css';
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+body {
+  font-size: 13px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+/* Used in our inline-styles.jsx as an example */
+.muidocs-checkbox-example {
+  border: 2px solid #FF9800;
+  background-color: #4CAF50;
+}
+
+.editor:focus {
+  outline: none;
+}

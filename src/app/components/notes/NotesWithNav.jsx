@@ -1,13 +1,13 @@
 import React from 'react';
-import Router from 'react-router';
-import { RouteHandler, Link } from 'react-router';
+import Router, { RouteHandler, Link } from 'react-router';
+import Radium from 'radium';
 
 import NoteStore from '../../stores/NoteStore';
 import NoteActions from '../../actions/NoteActions';
 import NoteService from '../../services/NoteService';
 
-import mui from 'material-ui';
-var Menu = mui.Menu;
+import Icon from 'react-geomicons';
+import mui, {FloatingActionButton, Paper} from 'material-ui';
 var {Spacing, Colors} = mui.Styles;
 var {StyleResizable, StylePropable} = mui.Mixins;
 
@@ -48,7 +48,7 @@ var NotesWithNav = React.createClass({
   },
 
   getStyles: function(){
-    var subNavWidth = Spacing.desktopKeylineIncrement * 3.5 + 'px';
+    var subNavWidth = Spacing.desktopKeylineIncrement * 4 + 'px';
     var styles = {
       root: {
       },
@@ -57,7 +57,9 @@ var NotesWithNav = React.createClass({
       },
       secondaryNav: {
         borderTop: 'solid 1px ' + Colors.grey300,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        height: '700px',
+        overflowY: 'scroll',
       },
       content: {
         boxSizing: 'border-box',
@@ -73,9 +75,12 @@ var NotesWithNav = React.createClass({
       contentWhenMedium: {
         marginLeft: subNavWidth,
         borderLeft: 'solid 1px ' + Colors.grey300,
-        minHeight: '800px'
+        height: '700px'
       },
-      itemSubheader: {
+      fab: {
+        position: 'fixed',
+        bottom: '20',
+        right: '20'
       }
     };
 
@@ -99,6 +104,7 @@ var NotesWithNav = React.createClass({
         <div style={styles.secondaryNav}>
           <NotesList notes={this.state.notes} />
         </div>
+        <FloatingActionButton style={styles.fab} secondary={true}></FloatingActionButton>
       </div>
     );
   },
@@ -118,43 +124,122 @@ var NotesWithNav = React.createClass({
   }
 });
 
-var NotesList = React.createClass({
+var NotesList = React.createClass(Radium.wrap({
+  _getStyles: function(){
+    var styles = {
+      root: {
+        listStyle: 'none',
+        marginTop: '0em',
+        padding: '0',
+        textDecoration: 'none',
+        color: '#999'
+      }
+    };
+
+    return styles;
+  },
+
   render: function() {
+    var styles = this._getStyles();
     return (
-      <ul>
+      <ul style={styles.root}>
         {this.props.notes.map(function(note, index){
           return <Item note={note} key={"note-" + index}/>
         })}
       </ul>
     );
   }
-});
+}));
 
-var Item = React.createClass({
+var Item = React.createClass(Radium.wrap({
+  getInitialState: function() {
+    return {
+      zDepth: 1
+    };
+  },
+
+  _getStyles: function(){
+    var styles = {
+      root: {
+/*        borderTop: 'solid 1px ' + Colors.grey300,*/
+        textDecoration: 'none',
+        paddingTop: '5px',
+        paddingBottom: '5px',
+        paddingRight: '10px',
+        paddingLeft: '10px',
+        position: 'relative'
+/*
+        ':hover': {
+          backgroundColor: Colors.cyan500,
+          color: 'white'
+        },
+*/
+      },
+      title: {
+        marginLeft: '10px',
+        paddingTop: '10px',
+        fontSize: '140%',
+        textDecoration: 'none',
+        fontSize: '125%',
+        color: Colors.cyan500
+      },
+      abstract: {
+        margin: '10px',
+        fontSize: '120%',
+        height: '45px',
+        color: '#999',
+        textDecoration: 'none',
+        overflow: 'hidden',
+      },
+      item: {
+        height: '120px',
+      },
+      date: {
+        marginRight: '10px',
+        fontSize: '120%',
+        color: '#999',
+        textDecoration: 'none',
+        fontStyle: 'italic',
+        fontSize: '80%',
+        float: 'right',
+      }
+    };
+
+    return styles;
+  },
+
+  _onMouseOver: function() {
+    this.setState({
+      zDepth: 3
+    });
+  },
+
+  _onMouseOut: function() {
+    this.setState({
+      zDepth: 1
+    });
+  },
+
   render: function() {
+    var styles = this._getStyles();
     var params = { noteId: this.props.note.id };
     return (
-      <div>
+    <div style={styles.root}>
         <Link to="note" params={params}>
-          <li>
-            <div>{this.props.note.title}</div>
-            <div>{this.props.note['abstract']}...</div>
-            <span>{timeago(this.props.note.updated_at)}</span>
-          </li>
+          <Paper
+            zDepth={this.state.zDepth}
+            onMouseOver={this._onMouseOver}
+            onMouseOut={this._onMouseOut}>
+            <li style={styles.item}>
+              <div style={styles.title}>{this.props.note.title}</div>
+              <div style={styles.abstract}>{this.props.note['abstract']}...</div>
+              <div style={styles.date}>{timeago(this.props.note.updated_at)}</div>
+            </li>
+          </Paper>
         </Link>
       </div>
     );
   }
-});
+}));
 
 module.exports = NotesWithNav;
-
-/*
- <Menu
-            ref="menuItems"
-            zDepth={0}
-            menuItemStyleSubheader={styles.itemSubheader}
-            menuItems={ notes }
-            selectedIndex={this._getSelectedIndex()}
-            onItemTap={this._onMenuItemClick} />
-*/

@@ -60,6 +60,7 @@ export default new class NoteService {
   }
 
   deleteNote(noteId) {
+    debugger;
     request.del(NOTES_URL + '/' + noteId)
       .set('Accept', 'application/json')
       .set('Authorization', localStorage.getItem('accessToken'))
@@ -68,10 +69,11 @@ export default new class NoteService {
         if (res) {
           if (res.error) {
             var errorMsgs = _getErrors(res);
-            NoteActions.deleteNote(noteId);
+            json = JSON.parse(res.text)
+            NoteActions.deleteNote(json);
           } else {
             json = JSON.parse(res.text);
-            NoteActions.deleteNote(noteId);
+            NoteActions.deleteNote(json);
           }
         }
       });

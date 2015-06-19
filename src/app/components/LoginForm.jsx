@@ -1,7 +1,7 @@
 import React from 'react/addons';
 import ReactMixin from 'react-mixin';
 import Router from 'react-router';
-import Auth from '../services/AuthService'
+import Auth from '../services/LoginService'
 import mui from 'material-ui';
 
 let Link = Router.Link;
@@ -33,23 +33,19 @@ let LoginForm = React.createClass({
     var styles = this._getStyles();
     return (
       <form style={styles.inputs} onSubmit={this._onSubmit}>
-        <label 
-          name="email" 
-          style={styles.labels}>Email</label><br />
         <TextField
           type="email"
           name="email"
           ref="email"
           valueLink={this.linkState('email')}
+          floatingLabelText="Enter Your E-Mail Address"
           hintText="E-Mail"/><br />
-        <label 
-          name="password" 
-          style={styles.labels}>Password</label><br />
         <TextField
           type="password"
           name="password"
           ref="password"
           valueLink={this.linkState('password')}
+          floatingLabelText="Enter Your Password"
           hintText="Password"/><br />
         <RaisedButton 
           label="Submit" 
@@ -73,7 +69,7 @@ let LoginForm = React.createClass({
         margin: '0 auto ' + desktopGutter + ' auto'
       },
       inputs: {
-        padding: '20px',
+        padding: '0px',
       },
       button: {
         marginTop: '10px',
@@ -81,10 +77,15 @@ let LoginForm = React.createClass({
       },
       labels: {
         fontSize: '15px',
-        paddingTop: '50px',
+        paddingTop: '0px',
         letterSpacing: 0,
         fontWeight: Typography.fontWeightMedium,
         color: Typography.textDarkBlack
+      },
+      span: {
+        paddingTop: '10px',
+        clear: 'both',
+        display: 'block'
       }
     };
 

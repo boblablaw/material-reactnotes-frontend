@@ -25,8 +25,12 @@ module.exports = {
     dest: dest
   },
   fontIcons: {
-    src: src + "/css/font-icons/**",
+    src: src + "/css/font/**",
     dest: dest + '/font-icons'
+  },
+  mediumEditor: {
+    src: src + "/css/medium-editor/**",
+    dest: dest + '/medium-editor'
   },
   browserify: {
     // Enable source maps

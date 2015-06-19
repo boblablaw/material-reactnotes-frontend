@@ -1,7 +1,7 @@
 import React from 'react/addons';
 import ReactMixin from 'react-mixin';
 import Router from 'react-router';
-import Auth from '../services/AuthService'
+import Auth from '../services/LoginService'
 import mui from 'material-ui';
 
 let Link = Router.Link;
@@ -33,41 +33,33 @@ var SignupForm = React.createClass({
     var styles = this._getStyles();
     return (
       <form style={styles.inputs} onSubmit={this._onSubmit}>
-        <label 
-          name="email" 
-          style={styles.labels}>Email</label><br />
         <TextField
           type="email"
           name="email"
           ref="email"
           valueLink={this.linkState('email')}
+          floatingLabelText="Enter Your E-Mail Address"
           hintText="E-Mail"/><br />
-        <label 
-          name="username" 
-          style={styles.labels}>Username</label><br />
         <TextField
           type="text"
           name="username"
           ref="username"
           valueLink={this.linkState('username')}
+          floatingLabelText="Enter Your Username"
           hintText="Username"/><br />
-        <label 
-          name="password" 
-          style={styles.labels}>Password</label><br />
         <TextField
           type="password"
           name="password"
           ref="password"
           valueLink={this.linkState('password')}
+          floatingLabelText="Enter Your Password"
           hintText="Password"/><br />
-        <label 
-          name="passwordConf" 
-          style={styles.labels}>Password Confirmation</label><br />
         <TextField
           type="password"
           name="password confirmation"
           ref="passwordConf"
           valueLink={this.linkState('passwordConf')}
+          floatingLabelText="Password Confirmation"
           hintText="Password Confirmation"/><br />
         <RaisedButton 
           label="Submit" 
