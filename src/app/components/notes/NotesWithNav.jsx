@@ -49,6 +49,7 @@ var NotesWithNav = React.createClass({
 
   getStyles: function(){
     var subNavWidth = Spacing.desktopKeylineIncrement * 4 + 'px';
+    let pageHeight = window.innerHeight -64;
     var styles = {
       root: {
       },
@@ -58,7 +59,7 @@ var NotesWithNav = React.createClass({
       secondaryNav: {
         borderTop: 'solid 1px ' + Colors.grey300,
         overflow: 'hidden',
-        height: '700px',
+        height: pageHeight + 'px',
         overflowY: 'scroll',
       },
       content: {
@@ -75,7 +76,7 @@ var NotesWithNav = React.createClass({
       contentWhenMedium: {
         marginLeft: subNavWidth,
         borderLeft: 'solid 1px ' + Colors.grey300,
-        height: '700px'
+        height: pageHeight + 'px',
       },
       fab: {
         position: 'fixed',
