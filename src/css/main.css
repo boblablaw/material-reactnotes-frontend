@@ -5,7 +5,7 @@
 @import "github.css";
 
 @import 'medium-editor/medium-editor.css';
-@import 'medium-editor/themes/default.css';
+@import 'medium-editor/themes/flat.css';
 
 a {
   text-decoration: none;
@@ -34,7 +34,9 @@ body {
   border: 2px solid #FF9800;
   background-color: #4CAF50;
 }
+/*
 
 .editor:focus {
   outline: none;
 }
+*/

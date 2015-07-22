@@ -1,5 +1,5 @@
 import React from 'react';
-import Router, {Route, NotFoundRoute, Redirect} from 'react-router';
+import Router, {Route, NotFoundRoute, DefaultRoute, Redirect} from 'react-router';
 
 import Master from './components/Master.jsx'
 import Login from './components/Login';
@@ -9,7 +9,8 @@ import Welcome from './components/Welcome';
 import About from './components/About';
 import GetStarted from './components/GetStarted';
 import Features from './components/Features';
-import NoteItem from './components/notes/NoteItem';
+import Note from './components/notes/Note';
+import NoteNew from './components/notes/NoteNew';
 
 import LoginActions from './actions/LoginActions';
 import RouterContainer from './services/RouterContainer';
@@ -24,7 +25,10 @@ let routes = (
     <Route name="login" path="/login" handler={Login}/>
     <Route name="signup" path="/signup" handler={Signup}/>
     <Route name="home" path="/" handler={Home}>
-      <Route name="note" path="/notes/:noteId" handler={NoteItem}/>
+      <Route name="note" path="/notes/:noteId" handler={Note}/>
+      <Route name="note-new" path="/new" handler={NoteNew}/>
+      <Redirect from="/" to="note-new" />
+      <DefaultRoute handler={NoteNew}/>
     </Route>
     <NotFoundRoute handler={Welcome}/>
     <Redirect from="boobs" to="welcome" />

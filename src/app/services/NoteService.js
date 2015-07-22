@@ -41,11 +41,11 @@ export default new class NoteService {
       });
   }
 
-  createNote(title, body) {
+  createNote(title, body_html, body_text) {
     request.post(NOTES_URL)
       .set('Accept', 'application/json')
       .set('Authorization', localStorage.getItem('accessToken'))
-      .send({ note: { title: title, body: body } })
+      .send({ note: { title: title, body_html: body_html, body_text: body_text }})
       .end(function(error, res){
         if (res) {
           if (res.error) {
@@ -60,7 +60,6 @@ export default new class NoteService {
   }
 
   deleteNote(noteId) {
-    debugger;
     request.del(NOTES_URL + '/' + noteId)
       .set('Accept', 'application/json')
       .set('Authorization', localStorage.getItem('accessToken'))
@@ -70,20 +69,20 @@ export default new class NoteService {
           if (res.error) {
             var errorMsgs = _getErrors(res);
             json = JSON.parse(res.text)
-            NoteActions.deleteNote(json);
+            NoteActions.deleteNote(json, noteId);
           } else {
             json = JSON.parse(res.text);
-            NoteActions.deleteNote(json);
+            NoteActions.deleteNote(json, noteId);
           }
         }
       });
   }
 
-  updateNote(noteId, title, body) {
+  updateNote(noteId, title, body_html, body_text) {
     request.put(NOTES_URL + '/' + noteId)
       .set('Accept', 'application/json')
       .set('Authorization', localStorage.getItem('accessToken'))
-      .send({ note: { title: title, body: body }})
+      .send({ note: { title: title, body_html: body_html, body_text: body_text }})
       .end(function(error, res){
         if (res) {
           if (res.error) {

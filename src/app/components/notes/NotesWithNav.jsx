@@ -48,7 +48,7 @@ var NotesWithNav = React.createClass({
   },
 
   getStyles: function(){
-    var subNavWidth = Spacing.desktopKeylineIncrement * 4 + 'px';
+    let subNavWidth = Spacing.desktopKeylineIncrement * 4 + 'px';
     let pageHeight = window.innerHeight -64;
     var styles = {
       root: {
@@ -105,7 +105,10 @@ var NotesWithNav = React.createClass({
         <div style={styles.secondaryNav}>
           <NotesList notes={this.state.notes} />
         </div>
-        <FloatingActionButton style={styles.fab} secondary={true}></FloatingActionButton>
+        <FloatingActionButton 
+          style={styles.fab} 
+          secondary={true} 
+          onTouchTap={this._onFabClick}>+</FloatingActionButton>
       </div>
     );
   },
@@ -119,13 +122,14 @@ var NotesWithNav = React.createClass({
       if (currentItem.id && (currentItem.id.toString() == this.getParams().noteId )) return i;
     }
   },
-
-  _onMenuItemClick: function(e, index, item) {
-    this.context.router.transitionTo('note', { noteId: item.id });
+  
+  _onFabClick: function() {
+    this.context.router.transitionTo('note-new');
   }
 });
 
 var NotesList = React.createClass(Radium.wrap({
+  
   _getStyles: function(){
     var styles = {
       root: {
@@ -145,7 +149,13 @@ var NotesList = React.createClass(Radium.wrap({
     return (
       <ul style={styles.root}>
         {this.props.notes.map(function(note, index){
-          return <Item note={note} key={"note-" + index}/>
+          return <Item 
+                    note={note} 
+                    id={note.id} 
+                    title={note.title} 
+                    body_text={note.body_text} 
+                    body_html={note.body_html} 
+                    key={"note-" + index}/>
         })}
       </ul>
     );
@@ -158,6 +168,10 @@ var Item = React.createClass(Radium.wrap({
       zDepth: 1
     };
   },
+  
+  contextTypes: {
+    router: React.PropTypes.func
+  },
 
   _getStyles: function(){
     var styles = {
@@ -169,19 +183,15 @@ var Item = React.createClass(Radium.wrap({
         paddingRight: '10px',
         paddingLeft: '10px',
         position: 'relative'
-/*
-        ':hover': {
-          backgroundColor: Colors.cyan500,
-          color: 'white'
-        },
-*/
       },
       title: {
         marginLeft: '10px',
+        marginRight: '30px',
         paddingTop: '10px',
         fontSize: '140%',
         textDecoration: 'none',
         fontSize: '125%',
+        whiteSpace: 'nowrap',
         color: Colors.cyan500
       },
       abstract: {
@@ -214,6 +224,10 @@ var Item = React.createClass(Radium.wrap({
       zDepth: 3
     });
   },
+  
+  _onItemClick: function() {
+    this.context.router.transitionTo('note', { noteId: this.props.note.id });
+  },
 
   _onMouseOut: function() {
     this.setState({
@@ -223,21 +237,20 @@ var Item = React.createClass(Radium.wrap({
 
   render: function() {
     var styles = this._getStyles();
-    var params = { noteId: this.props.note.id };
     return (
-    <div style={styles.root}>
-        <Link to="note" params={params}>
-          <Paper
-            zDepth={this.state.zDepth}
-            onMouseOver={this._onMouseOver}
-            onMouseOut={this._onMouseOut}>
-            <li style={styles.item}>
-              <div style={styles.title}>{this.props.note.title}</div>
-              <div style={styles.abstract}>{this.props.note['abstract']}...</div>
-              <div style={styles.date}>{timeago(this.props.note.updated_at)}</div>
-            </li>
-          </Paper>
-        </Link>
+      <div 
+        style={styles.root} 
+        onTouchTap={this._onItemClick} 
+        onMouseOver={this._onMouseOver}
+        onMouseOut={this._onMouseOut}>
+        <Paper
+          zDepth={this.state.zDepth}>
+          <li style={styles.item}>
+            <div style={styles.title}>{this.props.note.title}</div>
+            <div style={styles.abstract}>{this.props.note['abstract']}...</div>
+            <div style={styles.date}>{timeago(this.props.note.updated_at)}</div>
+          </li>
+        </Paper>
       </div>
     );
   }

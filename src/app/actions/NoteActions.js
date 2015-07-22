@@ -34,9 +34,10 @@ export default {
     });
   },
 
-  deleteNote: (json) => {
+  deleteNote: (json, noteId) => {
     Dispatcher.dispatch({
       actionType: DELETE_NOTE,
+      noteId: noteId,
       json: json
     });
   }

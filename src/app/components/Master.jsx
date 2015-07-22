@@ -5,6 +5,7 @@ import LoginStore from '../stores/LoginStore';
 
 import AppLeftNav from './common/AppLeftNav.jsx';
 import FullWidthSection from './common/FullWidthSection.jsx';
+import NewTheme from '../themes/new-theme.js';
 
 import mui from 'material-ui';
 var Colors = mui.Styles.Colors;
@@ -14,8 +15,9 @@ var { AppBar, AppCanvas, Menu, IconButton, MenuItem } = mui;
 
 class Master extends React.Component {
   constructor() {
-    super()
+    super();
     this._onLeftIconButtonTouchTap = this._onLeftIconButtonTouchTap.bind(this);
+    this._setTheme();
   }
   
   getChildContext() {
@@ -23,39 +25,13 @@ class Master extends React.Component {
       muiTheme: ThemeManager.getCurrentTheme()
     };
   }
-
-  componentWillMount() {
-    ThemeManager.setPalette({
-      accent1Color: Colors.deepOrange500
-    });
-  }
-
-  getStyles() {
-    var darkWhite = Colors.darkWhite;
-    return {
-      footer: {
-        backgroundColor: Colors.grey900,
-        textAlign: 'center'
-      },
-      a: {
-        color: darkWhite
-      },
-      p: {
-        margin: '0 auto',
-        padding: '0',
-        color: Colors.lightWhite,
-        maxWidth: '335px'
-      },
-      iconButton: {
-        color: darkWhite
-      }
-    };
+  
+  _setTheme() {
+    ThemeManager.setTheme(NewTheme);
   }
 
   render() {
-    var styles = this.getStyles();
     var appBar = this._getAppBar();
-
     return (
       <AppCanvas predefinedLayout={1}>
         { appBar }

@@ -1,6 +1,10 @@
 import React from 'react';
 import MediumEditor from 'medium-editor';
 
+import mui from 'material-ui';
+var {Spacing, Colors, Transitions} = mui.Styles;
+var {StyleResizable, StylePropable} = mui.Mixins;
+
 var Editor = React.createClass({
   getInitialState: function() {
     return {
@@ -20,7 +24,7 @@ var Editor = React.createClass({
     this.medium = new MediumEditor(dom, this.props.options);
     this.medium.subscribe('editableInput', function(e) {
       _this._updated = true;
-      _this.change(dom.innerHTML);
+      _this._onChange(dom.innerHTML);
     });
   },
 
@@ -37,14 +41,30 @@ var Editor = React.createClass({
   },
 
   render: function() {
+    var styles = this._getStyles();
     return React.createElement(this.props.tag, {
       className: this.props.className,
+      style: styles.bodyTextField,
       contentEditable: true,
       dangerouslySetInnerHTML: { __html: this.state.text }
     });
   },
+  
+  _getStyles() {
+    let bodyHeight = window.innerHeight - 215;
+    let styles = {
+      bodyTextField: {
+        width: '100%',
+        display: 'block',
+        fontSize: '110%',
+        height: bodyHeight + 'px',
+        outline: 'none'
+      }
+    };
+    return styles;
+  },
 
-  change: function(text) {
+  _onChange: function(text) {
     if (this.props.onChange) this.props.onChange(text);
   },
 });

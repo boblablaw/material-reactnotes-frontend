@@ -35,7 +35,7 @@ var Welcome = React.createClass({
   _getWelcomePageHero: function() {
     var styles = {
       root: {
-        backgroundColor: Colors.cyan500,
+        backgroundColor: ThemeManager.palette.primary1Color,
         overflow: 'hidden'
       },
       svgLogo: {
@@ -96,7 +96,6 @@ var Welcome = React.createClass({
 
     return (
       <FullWidthSection style={styles.root}>
-
           <div style={styles.tagline}>
             <h1 style={styles.h1}>ReactNotes</h1>
             <h2 style={styles.h2}>

@@ -3,14 +3,10 @@ var Radium = require('radium');
 var mui = require('material-ui');
 var FullWidthSection = require('./common/FullWidthSection.jsx');
 var LoginForm = require('./LoginForm.jsx');
-var {Spacing, Typography} = mui.Styles;
 
 class Login extends React.Component {
-  getStyles() {
+  _getStyles() {
     return {
-      root: {
-/*        paddingTop: Spacing.desktopKeylineIncrement*/
-      },
       fullWidthSection: {
         display: 'flex',
         justifyContent: 'center'
@@ -19,19 +15,15 @@ class Login extends React.Component {
   }
 
   render() {
-    var styles = this.getStyles();
+    var styles = this._getStyles();
     return (
-      <div style={styles.root}>
-      <FullWidthSection style={styles.fullWidthSection}>
+      <div>
+        <FullWidthSection style={styles.fullWidthSection}>
           <LoginForm />
         </FullWidthSection>
       </div>
     );
   }
 }
-
-Login.contextTypes = {
-  muiTheme: React.PropTypes.object
-};
 
 module.exports = Radium.Enhancer(Login);

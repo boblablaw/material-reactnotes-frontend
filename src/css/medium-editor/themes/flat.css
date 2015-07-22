@@ -1,36 +1,36 @@
 .medium-toolbar-arrow-under:after {
   top: 60px;
-  border-color: #57ad68 transparent transparent transparent; }
+  border-color: #80deea transparent transparent transparent; }
 
 .medium-toolbar-arrow-over:before {
   top: -8px;
-  border-color: transparent transparent #57ad68 transparent; }
+  border-color: transparent transparent #80deea transparent; }
 
 .medium-editor-toolbar {
-  background-color: #57ad68; }
+  background-color: #80deea; }
   .medium-editor-toolbar li {
     padding: 0; }
     .medium-editor-toolbar li button {
       min-width: 60px;
       height: 60px;
       border: none;
-      border-right: 1px solid #9ccea6;
+      border-right: 1px solid #0097a7;
       background-color: transparent;
       color: #fff;
       -webkit-transition: background-color 0.2s ease-in, color 0.2s ease-in;
               transition: background-color 0.2s ease-in, color 0.2s ease-in; }
       .medium-editor-toolbar li button:hover {
-        background-color: #346a3f;
+        background-color: #00bcd4;
         color: #fff; }
     .medium-editor-toolbar li .medium-editor-button-active {
-      background-color: #23482a;
+      background-color: #0097a7;
       color: #fff; }
     .medium-editor-toolbar li .medium-editor-button-last {
       border-right: none; }
 
 .medium-editor-toolbar-form .medium-editor-toolbar-input {
   height: 60px;
-  background: #57ad68;
+  background: #0097a7;
   color: #fff; }
   .medium-editor-toolbar-form .medium-editor-toolbar-input::-webkit-input-placeholder {
     color: #fff;
@@ -51,7 +51,7 @@
   color: #fff; }
 
 .medium-editor-toolbar-anchor-preview {
-  background: #57ad68;
+  background: #00bcd4;
   color: #fff; }
 
 .medium-editor-placeholder:after {

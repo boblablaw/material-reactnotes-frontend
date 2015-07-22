@@ -8,7 +8,6 @@ var {StylePropable, StyleResizable} = mui.Mixins;
 var {Colors, Spacing, Transitions, Typography} = mui.Styles;
 
 var WelcomeFeature = React.createClass({
-
   mixins: [StylePropable, StyleResizable],
 
   propTypes: {
